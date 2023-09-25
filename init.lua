@@ -15,6 +15,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.opt.list = true
+vim.opt.listchars:append "space:⋅"
+vim.opt.listchars:append "eol:↴"
+
+
 vim.g.mapleader = require("custom_keys").leader
 vim.g.maplocalleader = "\\"
 vim.g.encoding="utf-8"
