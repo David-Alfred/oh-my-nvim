@@ -21,6 +21,8 @@ vim.g.encoding="utf-8"
 vim.o.fileencodings="utf-8"
 vim.g.goyo_height="95%"
 vim.wo.wrap = true
+vim.wo.linebreak = true
+vim.wo.list = false -- extra option I set in addition to the ones in your question
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
