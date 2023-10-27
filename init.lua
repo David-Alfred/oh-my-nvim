@@ -15,7 +15,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-if vim.loop.os_uname() == 'Linux' then vim.opt.shell = 'cmd.exe' else vim.opt.shell = 'bash' end
+if vim.loop.os_uname() == 'Linux' then vim.opt.shell = 'bash' else  vim.opt.shell = 'cmd.exe' end
 vim.opt.list = true
 vim.opt.listchars:append "space:⋅"
 vim.opt.listchars:append "eol:↴"
