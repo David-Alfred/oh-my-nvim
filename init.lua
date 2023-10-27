@@ -15,6 +15,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+if vim.loop.os_uname() == 'Linux' then vim.opt.shell = 'cmd.exe' else vim.opt.shell = 'bash' end
+
 vim.g.mapleader = require("custom_keys").leader
 vim.g.maplocalleader = "\\"
 vim.g.encoding="utf-8"
