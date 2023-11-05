@@ -4,6 +4,10 @@ return {
       'JuliaEditorSupport/julia-vim',
       
     },
+    
+    {
+      'rcarriga/nvim-dap-ui'
+    },
     { 
       "lukas-reineke/indent-blankline.nvim" 
        -- config = function() {
@@ -97,5 +101,14 @@ return {
     },
     {
       'honza/vim-snippets'
+    },
+    {
+      "mfussenegger/nvim-dap",
+    },
+    {
+      "jay-babu/mason-nvim-dap.nvim",
+    },
+    {
+      'mfussenegger/nvim-dap-python',
     },
 }

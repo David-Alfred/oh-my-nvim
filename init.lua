@@ -15,10 +15,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-if vim.loop.os_uname().sysname == 'Linux' then vim.opt.shell = 'bash' else  vim.opt.shell = 'cmd.exe' end
+if vim.loop.os_uname().sysname == "Linux" then
+	vim.opt.shell = "bash"
+else
+	vim.opt.shell = "cmd.exe"
+end
 vim.opt.list = true
-vim.opt.listchars:append "space:⋅"
-vim.opt.listchars:append "eol:↴"
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
 
 vim.cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
 vim.cmd([[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]])
@@ -27,12 +31,11 @@ vim.cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
 vim.cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
 vim.cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
 
-
 vim.g.mapleader = require("custom_keys").leader
 vim.g.maplocalleader = "\\"
-vim.g.encoding="utf-8"
-vim.o.fileencodings="utf-8"
-vim.g.goyo_height="95%"
+vim.g.encoding = "utf-8"
+vim.o.fileencodings = "utf-8"
+vim.g.goyo_height = "95%"
 vim.wo.wrap = true
 vim.wo.linebreak = true
 vim.wo.list = false -- extra option I set in addition to the ones in your question
@@ -50,57 +53,96 @@ require("lazy").setup({
 		notify = false, -- get a notification when changes are found
 	},
 })
-require('bookmarks').setup {
+require("bookmarks").setup({
 	-- sign_priority = 8,  --set bookmark sign priority to cover other sign
-	save_file = vim.fn.expand "$HOME/.bookmarks", -- bookmarks save file path
-	keywords =  {
-	  ["@t"] = "☑️ ", -- mark annotation startswith @t ,signs this icon as `Todo`
-	  ["@w"] = "⚠️ ", -- mark annotation startswith @w ,signs this icon as `Warn`
-	  ["@f"] = "⛏ ", -- mark annotation startswith @f ,signs this icon as `Fix`
-	  ["@n"] = " ", -- mark annotation startswith @n ,signs this icon as `Note`
+	save_file = vim.fn.expand("$HOME/.bookmarks"), -- bookmarks save file path
+	keywords = {
+		["@t"] = "☑️ ", -- mark annotation startswith @t ,signs this icon as `Todo`
+		["@w"] = "⚠️ ", -- mark annotation startswith @w ,signs this icon as `Warn`
+		["@f"] = "⛏ ", -- mark annotation startswith @f ,signs this icon as `Fix`
+		["@n"] = " ", -- mark annotation startswith @n ,signs this icon as `Note`
 	},
 	on_attach = function(bufnr)
-	  local bm = require "bookmarks"
-	  local map = vim.keymap.set
-	  map("n","mm",bm.bookmark_toggle) -- add or remove bookmark at current line
-	  map("n","mi",bm.bookmark_ann) -- add or edit mark annotation at current line
-	  map("n","mc",bm.bookmark_clean) -- clean all marks in local buffer
-	  map("n","mn",bm.bookmark_next) -- jump to next mark in local buffer
-	  map("n","mp",bm.bookmark_prev) -- jump to previous mark in local buffer
-	  map("n","ml",bm.bookmark_list) -- show marked file list in quickfix window
-	end
-}
-require'lspconfig'.typst_lsp.setup{
+		local bm = require("bookmarks")
+		local map = vim.keymap.set
+		map("n", "mm", bm.bookmark_toggle) -- add or remove bookmark at current line
+		map("n", "mi", bm.bookmark_ann) -- add or edit mark annotation at current line
+		map("n", "mc", bm.bookmark_clean) -- clean all marks in local buffer
+		map("n", "mn", bm.bookmark_next) -- jump to next mark in local buffer
+		map("n", "mp", bm.bookmark_prev) -- jump to previous mark in local buffer
+		map("n", "ml", bm.bookmark_list) -- show marked file list in quickfix window
+	end,
+})
+require("lspconfig").typst_lsp.setup({
 	settings = {
-		exportPdf = "onSave" -- Choose onType, onSave or never.
-        -- serverPath = "" -- Normally, there is no need to uncomment it.
-	}
-}
-vim.filetype.add({ extension = {typ = "typst"}})
+		exportPdf = "onSave", -- Choose onType, onSave or never.
+		-- serverPath = "" -- Normally, there is no need to uncomment it.
+	},
+})
+vim.filetype.add({ extension = { typ = "typst" } })
 local highlight = {
-    "RainbowRed",
-    "RainbowYellow",
-    "RainbowBlue",
-    "RainbowOrange",
-    "RainbowGreen",
-    "RainbowViolet",
-    "RainbowCyan",
+	"RainbowRed",
+	"RainbowYellow",
+	"RainbowBlue",
+	"RainbowOrange",
+	"RainbowGreen",
+	"RainbowViolet",
+	"RainbowCyan",
 }
 
-local hooks = require "ibl.hooks"
+local hooks = require("ibl.hooks")
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-    vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-    vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-    vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-    vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-    vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-    vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-    vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+	vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+	vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+	vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+	vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+	vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+	vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+	vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 end)
+require('dap-python').setup('~/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
+local dapui = require("dapui")
+dapui.setup({})
+local dap = require("dap")
+dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open({})
+end
 
-require("ibl").setup { indent = { highlight = highlight } }
+dap.listeners.before.event_terminated["dapui_config"] = function()
+    dapui.close({})
+end
+
+
+dap.listeners.before.event_exited["dapui_config"] = function()
+    dapui.close({})
+end
+vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
+vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
+vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
+vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
+vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+-- vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+--   require('dap.ui.widgets').hover()
+-- end)
+-- vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+--   require('dap.ui.widgets').preview()
+-- end)
+-- vim.keymap.set('n', '<Leader>df', function()
+--   local widgets = require('dap.ui.widgets')
+--   widgets.centered_float(widgets.frames)
+-- end)
+-- vim.keymap.set('n', '<Leader>ds', function()
+--       local widgets = require('dap.ui.widgets')
+--       widgets.centered_float(widgets.scopes)
+--     end)
+
+
+require("ibl").setup({ indent = { highlight = highlight } })
 -- Final settings
 require("core")
 pcall(require, "custom")
